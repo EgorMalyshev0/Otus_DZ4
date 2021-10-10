@@ -6,15 +6,16 @@
 //
 
 import SwiftUI
+import DZNavigation
 
 struct CharacterListCell: View {
     
-    @EnvironmentObject var charactersListViewModel: CharactersScreenViewModel
+    @EnvironmentObject var charactersListViewModel: CharactersViewModel
     
     var character: Character
 
     var body: some View {
-        NavPushButton(destination: CharacterScreen(character: character).environmentObject(charactersListViewModel)) {
+        NavPushButton(destination: CharacterScreen(character: character)) {
             Text(character.name.asStringOrEmpty)
                 .onAppear() {
                     if self.charactersListViewModel.characterList.isLast(character) {

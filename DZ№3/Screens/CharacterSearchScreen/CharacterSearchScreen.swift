@@ -9,7 +9,7 @@ import SwiftUI
 
 struct CharacterSearchScreen: View {
     
-    @ObservedObject var charactersListViewModel: CharactersScreenViewModel = .init()
+    @ObservedObject var charactersListViewModel: CharactersViewModel = .init()
     
     var body: some View {
         CharactersList().environmentObject(charactersListViewModel)

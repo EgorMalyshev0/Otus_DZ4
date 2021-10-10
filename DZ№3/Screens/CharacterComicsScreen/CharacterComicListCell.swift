@@ -25,7 +25,7 @@ struct CharacterComicListCell: View {
             WebImage(url: URL(string: imageURL))
                 .resizable()
                 .aspectRatio(contentMode: .fit)
-                .frame(height: 40)
+                .frame(width: 26, height: 40)
             
             Text(comic.title)
         }

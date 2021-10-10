@@ -7,6 +7,7 @@
 
 import SwiftUI
 import DZCoreServices
+import DZNavigation
 
 struct ContentView: View {
     
@@ -18,7 +19,6 @@ struct ContentView: View {
     var body: some View {
         NavControllerView(transition: .custom(.moveAndFade)) {
             CharacterSearchScreen()
-            
         }
         
     }

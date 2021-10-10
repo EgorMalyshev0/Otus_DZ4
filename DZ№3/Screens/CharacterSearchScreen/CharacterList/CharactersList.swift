@@ -9,7 +9,7 @@ import SwiftUI
 
 struct CharactersList: View {
     
-    @EnvironmentObject var charactersListViewModel: CharactersScreenViewModel
+    @EnvironmentObject var charactersListViewModel: CharactersViewModel
 
     var body: some View {
         List {

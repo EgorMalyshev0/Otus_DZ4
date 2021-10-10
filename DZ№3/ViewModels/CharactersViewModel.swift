@@ -8,19 +8,15 @@
 import Foundation
 import DZCoreServices
 
-final class CharactersScreenViewModel: ObservableObject {
+final class CharactersViewModel: ObservableObject {
     
     @Injected var characterApi: CharacterApi?
-    @Injected var dbService: MockDatabaseService?
     
     @Published var characterList: [Character] = .init()
     @Published var page: Int = 0
     @Published var isPageLoading: Bool = false
     @Published var totalResults: Int = 50000
     @Published var pageLoadCount: Int = 0
-    
-    @Published var comicsList: [Comic] = .init()
-    @Published var areComicsLoading: Bool = false
     
     var nameStartsWith = "a"
     
@@ -53,14 +49,4 @@ final class CharactersScreenViewModel: ObservableObject {
         }
     }
     
-    func loadComics(byId id: Int) {
-        areComicsLoading = true
-        characterApi?.getComics(byCharacterId: id) { [weak self] response in
-            self?.areComicsLoading = false
-            guard let response = response else { return }
-            print(response)
-            self?.comicsList.append(contentsOf: response.data.results)
-            self?.dbService?.test()
-        }
-    }
 }

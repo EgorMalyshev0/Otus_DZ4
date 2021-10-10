@@ -5,14 +5,12 @@
 //  Created by Egor Malyshev on 26.09.2021.
 //
 
-import Foundation
 import SwiftUI
 import SDWebImageSwiftUI
+import DZNavigation
 
 struct CharacterScreen: View {
     
-    @EnvironmentObject var charactersListViewModel: CharactersScreenViewModel
-
     var character: Character
     
     var imageURL: String {
@@ -38,17 +36,12 @@ struct CharacterScreen: View {
                     .resizable()
                     .aspectRatio(contentMode: .fit)
                     .frame(height: 200)
-//
+                
                 Text(character.description.asStringOrEmpty)
                     .font(.caption)
                     .padding()
 
-                NavPushButton(destination: CharacterComicsScreen(character: character)
-                                .environmentObject(charactersListViewModel)
-                                .onAppear {
-                    self.charactersListViewModel.comicsList = .init()
-                    self.charactersListViewModel.loadComics(byId: character.id.asIntOrZero)
-                }) {
+                NavPushButton(destination: CharacterComicsScreen(character: character)) {
                     Text("Show list of comics containing \(character.name.asStringOrEmpty)")
                 }
                 .font(.caption2)

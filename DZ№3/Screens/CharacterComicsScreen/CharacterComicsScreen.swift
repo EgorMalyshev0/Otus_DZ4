@@ -6,10 +6,11 @@
 //
 
 import SwiftUI
+import DZNavigation
 
 struct CharacterComicsScreen: View {
         
-    @EnvironmentObject var charactersListViewModel: CharactersScreenViewModel
+    @ObservedObject var characterComicsViewModel: CharacterComicsViewModel = .init()
     
     var character: Character
     
@@ -20,16 +21,17 @@ struct CharacterComicsScreen: View {
                     .font(.title)
             }
             
-            if charactersListViewModel.areComicsLoading {
+            if characterComicsViewModel.areComicsLoading {
                 ProgressView()
                     .progressViewStyle(CircularProgressViewStyle())
                     .padding()
             }
-            List {
-                ForEach(charactersListViewModel.comicsList) { item in
-                    CharacterComicListCell(comic: item)
-                }
+            List(characterComicsViewModel.comicsList) { comic in
+                CharacterComicListCell(comic: comic)
             }
+        }
+        .onAppear {
+            characterComicsViewModel.loadComics(byId: character.id.asIntOrZero)
         }
     }
 }
